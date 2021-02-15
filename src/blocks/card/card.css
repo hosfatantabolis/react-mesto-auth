@@ -1,0 +1,22 @@
+@import url(./__photo/card__photo.css);
+@import url(./__row/card__row.css);
+@import url(./__like-count/card__like-count.css);
+@import url(./__name/card__name.css);
+@import url(./__like/card__like.css);
+@import url(./__like/_active/card__like_active.css);
+@import url(./__delete/card__delete.css);
+@import url(./__delete/_hidden/card__delete_hidden.css);
+
+.card {
+  position: relative;
+  max-width: 282px;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .card {
+    margin: auto;
+  }
+}

@@ -1,0 +1,8 @@
+.card__row {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 25px 21px 27px 21px;
+  justify-content: space-between;
+}

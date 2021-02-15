@@ -1,0 +1,20 @@
+@import url(./__input/auth__input.css);
+@import url(./__title/auth__title.css);
+@import url(./__send/auth__send.css);
+@import url(./__link/auth__link.css);
+@import url(./__text/auth__text.css);
+
+.auth {
+  margin: auto;
+  max-width: 358px;
+  width: calc(882 / 1280 * 100%);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+  .auth {
+    width: calc(260 / 320 * 100%);
+  }
+}

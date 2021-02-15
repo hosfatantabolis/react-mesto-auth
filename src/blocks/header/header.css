@@ -1,0 +1,20 @@
+@import url(./__auth-group/header__auth-group.css);
+@import url(./__button/header__button.css);
+.header {
+  margin: auto;
+  padding: 49px 0 37px 5px;
+  width: calc(882 / 1280 * 100%);
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #545454;
+  box-sizing: border-box;
+  display: flex;
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    width: 100%;
+    padding-left: 26px;
+    padding-bottom: 28px;
+  }
+}

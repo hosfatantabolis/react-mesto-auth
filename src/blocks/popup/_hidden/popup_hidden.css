@@ -1,0 +1,23 @@
+@keyframes hide {
+  0% {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+  }
+  50% {
+    display: flex;
+    visibility: visible;
+  }
+  100% {
+    visibility: hidden;
+    display: none;
+    opacity: 0;
+  }
+}
+
+.popup_hidden {
+  display: flex;
+  opacity: 0;
+  animation: hide 500ms linear;
+  animation-fill-mode: forwards;
+}
