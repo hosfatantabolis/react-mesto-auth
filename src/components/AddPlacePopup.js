@@ -5,18 +5,30 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
   const [link, setLink] = React.useState("");
   const [nameInputError, setNameInputError] = React.useState();
   const [linkInputError, setLinkInputError] = React.useState();
-  const nameRef = React.useRef();
-  const linkRef = React.useRef();
   const [buttonStateDisabled, setButtonStateDisabled] = React.useState(true);
-  function validate() {
-    if (nameRef.current.validity.valid && linkRef.current.validity.valid) {
+  React.useEffect(() => {
+    if (nameInputError === "" && linkInputError === "") {
       setButtonStateDisabled(false);
-      setNameInputError("");
-      setLinkInputError("");
-    } else {
-      setButtonStateDisabled(true);
-      setNameInputError(nameRef.current.validationMessage);
-      setLinkInputError(linkRef.current.validationMessage);
+    }
+  }, [name, link]);
+
+  function validate(e) {
+    if (e.target.validity.valid === false) {
+      if (e.target.id === "card-title") {
+        setButtonStateDisabled(true);
+        setNameInputError(e.target.validationMessage);
+      }
+      if (e.target.id === "card-link") {
+        setButtonStateDisabled(true);
+        setLinkInputError(e.target.validationMessage);
+      }
+    } else if (e.target.validity.valid === true) {
+      if (e.target.id === "card-title") {
+        setNameInputError(e.target.validationMessage);
+      }
+      if (e.target.id === "card-link") {
+        setLinkInputError(e.target.validationMessage);
+      }
     }
   }
 
@@ -31,11 +43,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
   }
   function handleNameChange(e) {
     setName(e.target.value);
-    validate();
+    validate(e);
   }
   function handleLinkChange(e) {
     setLink(e.target.value);
-    validate();
+    validate(e);
   }
   return (
     <PopupWithForm
@@ -51,7 +63,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
       <>
         <label className="popup__field">
           <input
-            ref={nameRef}
             type="text"
             minLength="2"
             maxLength="30"
@@ -73,7 +84,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
         </label>
         <label className="popup__field">
           <input
-            ref={linkRef}
             type="url"
             id="card-link"
             onChange={handleLinkChange}

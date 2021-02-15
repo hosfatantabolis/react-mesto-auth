@@ -28,7 +28,7 @@ function App() {
   const [successState, setSuccessState] = React.useState(false);
   const [email, setEmail] = React.useState("");
   const [loggedIn, setLoggedIn] = React.useState(false);
-  React.useEffect(() => {}, [loggedIn, email]);
+
   React.useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
@@ -155,8 +155,7 @@ function App() {
         }
       })
       .then((res) => {
-        const user = { name: res.name, about: res.about, avatar: res.avatar };
-        setCurrentUser(user);
+        setCurrentUser(res);
         setIsLoading(false);
         closeAllPopups();
       })

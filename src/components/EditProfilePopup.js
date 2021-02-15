@@ -8,39 +8,49 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
     setButtonStateDisabled(true);
     setDescription(currentUser.about);
   }, [currentUser]);
+
   //инпуты
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
-  const nameRef = React.useRef();
-  const descriptionRef = React.useRef();
+  React.useEffect(() => {
+    if (nameInputError === "" && descriptionInputError === "") {
+      setButtonStateDisabled(false);
+    }
+  }, [name, description]);
   //спаны ошибок
   const [nameInputError, setNameInputError] = React.useState();
   const [descriptionInputError, setDescriptionInputError] = React.useState();
 
   const [buttonStateDisabled, setButtonStateDisabled] = React.useState(true);
 
-  function validate() {
-    if (
-      nameRef.current.validity.valid &&
-      descriptionRef.current.validity.valid
-    ) {
-      setNameInputError("");
-      setDescriptionInputError("");
-      setButtonStateDisabled(false);
-    } else {
-      setNameInputError(nameRef.current.validationMessage);
-      setDescriptionInputError(descriptionRef.current.validationMessage);
-      setButtonStateDisabled(true);
+  function validate(e) {
+    if (e.target.validity.valid === false) {
+      if (e.target.id === "profile-name") {
+        setButtonStateDisabled(true);
+        setNameInputError(e.target.validationMessage);
+      }
+      if (e.target.id === "profile-profession") {
+        setButtonStateDisabled(true);
+        setDescriptionInputError(e.target.validationMessage);
+      }
+    } else if (e.target.validity.valid === true) {
+      if (e.target.id === "profile-name") {
+        setNameInputError(e.target.validationMessage);
+      }
+      if (e.target.id === "profile-profession") {
+        setDescriptionInputError(e.target.validationMessage);
+      }
     }
   }
+
   function handleNameChange(e) {
     setName(e.target.value);
-    validate();
+    validate(e);
   }
 
   function handleDesriptionChange(e) {
     setDescription(e.target.value);
-    validate();
+    validate(e);
   }
 
   function handleSubmit(e) {
@@ -65,7 +75,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
       <>
         <label className="popup__field">
           <input
-            ref={nameRef}
             onChange={handleNameChange}
             value={name}
             type="text"
@@ -87,7 +96,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
         </label>
         <label className="popup__field">
           <input
-            ref={descriptionRef}
             onChange={handleDesriptionChange}
             value={description}
             type="text"

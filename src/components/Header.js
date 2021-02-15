@@ -2,7 +2,7 @@ import logo from "../images/logo-light.svg";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 function Header({ loggedIn, email, onLogout }) {
-  let location = useLocation();
+  const location = useLocation();
 
   let buttonText = "";
   let linkTo = "";
@@ -23,7 +23,7 @@ function Header({ loggedIn, email, onLogout }) {
         <p className="header__email">{email}</p>
         {loggedIn ? (
           <button className="header__button" onClick={onLogout}>
-            Выйти
+            {buttonText}
           </button>
         ) : (
           <Link to={linkTo}>
