@@ -7,6 +7,9 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
   const [linkInputError, setLinkInputError] = React.useState();
   const [buttonStateDisabled, setButtonStateDisabled] = React.useState(true);
   React.useEffect(() => {
+      setButtonStateDisabled(true);
+  }, [isOpen]);
+  React.useEffect(() => {
     if (nameInputError === "" && linkInputError === "") {
       setButtonStateDisabled(false);
     }

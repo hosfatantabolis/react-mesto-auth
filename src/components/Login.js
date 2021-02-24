@@ -13,7 +13,6 @@ const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onLogin(data.password, data.email).then(history.push("/"));
-    console.log(data.email, data.password);
   };
   return (
     <div className="auth auth_type_login">

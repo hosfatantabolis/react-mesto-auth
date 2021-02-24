@@ -15,12 +15,10 @@ const Register = ({ onRegister }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister(data.password, data.email).then((data) => {
-      if (!data.error) {
+      if (data) {
         history.push("/signin");
       }
     });
-    // .catch((err) => {});
-    console.log(data.email, data.password);
   };
 
   return (

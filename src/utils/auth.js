@@ -12,6 +12,7 @@ class Auth {
       if (res.ok) {
         return res.json();
       }
+      console.log(res);
       return Promise.reject(res);
     });
   }
@@ -34,7 +35,7 @@ class Auth {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${jwt}`,
+        authorization: jwt,
       },
     }).then((res) => {
       if (res.ok) {
@@ -45,8 +46,9 @@ class Auth {
   }
 }
 
+
 const options = {
-  baseURL: "https://auth.nomoreparties.co",
+  baseURL: "https://api.hosfatantabolis.students.nomoreparties.space",
   headers: {
     "Content-Type": "application/json",
   },

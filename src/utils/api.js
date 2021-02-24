@@ -6,7 +6,7 @@ class Api {
   }
 
   getInitialCards() {
-    return fetch(this.baseURL + "/v1/" + this.headers.cohort + "/cards", {
+    return fetch(this.baseURL + "/cards", {
       headers: this.headers,
     })
       .then((res) => {
@@ -25,7 +25,7 @@ class Api {
   }
 
   addCard(name, link) {
-    return fetch(this.baseURL + "/v1/" + this.headers.cohort + "/cards/", {
+    return fetch(this.baseURL + "/cards/", {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({
@@ -43,7 +43,7 @@ class Api {
 
   deleteCard(cardId) {
     return fetch(
-      this.baseURL + "/v1/" + this.headers.cohort + "/cards/" + cardId,
+      this.baseURL + "/cards/" + cardId,
       {
         method: "DELETE",
         headers: this.headers,
@@ -55,7 +55,7 @@ class Api {
 
   likeCard(cardId) {
     return fetch(
-      this.baseURL + "/v1/" + this.headers.cohort + "/cards/likes/" + cardId,
+      this.baseURL + "/cards/" + cardId + "/likes/" ,
       {
         method: "PUT",
         headers: this.headers,
@@ -71,7 +71,7 @@ class Api {
 
   removeCardLike(cardId) {
     return fetch(
-      this.baseURL + "/v1/" + this.headers.cohort + "/cards/likes/" + cardId,
+      this.baseURL + "/cards/" + cardId + "/likes/",
       {
         method: "DELETE",
         headers: this.headers,
@@ -98,14 +98,13 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch(this.baseURL + "/v1/" + this.headers.cohort + "/users/me", {
+    return fetch(this.baseURL + "/users/me", {
       headers: this.headers,
     })
       .then((res) => {
         if (res.ok) {
           return res.json();
         }
-
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch((err) => {
@@ -114,7 +113,7 @@ class Api {
   }
 
   setUserInfo(name, about) {
-    return fetch(this.baseURL + "/v1/" + this.headers.cohort + "/users/me", {
+    return fetch(this.baseURL + "/users/me", {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
@@ -136,7 +135,7 @@ class Api {
 
   updateAvatar(link) {
     return fetch(
-      this.baseURL + "/v1/" + this.headers.cohort + "/users/me/avatar",
+      this.baseURL + "/users/me/avatar",
       {
         method: "PATCH",
         headers: this.headers,
@@ -156,13 +155,18 @@ class Api {
         console.log(err);
       });
   }
+
+
+  setHeaders(jwt){
+    this.headers.authorization = jwt;
+  }
 }
 
-const options = {
-  baseURL: "https://mesto.nomoreparties.co",
+let options = {
+  baseURL: "https://api.hosfatantabolis.students.nomoreparties.space",
   headers: {
-    authorization: "9451417e-55c5-458c-a47b-214236171470",
-    cohort: "cohort-17",
+    authorization: "",
+    // cohort: "cohort-17",
     "Content-Type": "application/json",
   },
 };

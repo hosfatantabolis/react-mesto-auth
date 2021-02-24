@@ -41,9 +41,11 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
+          api.setHeaders(data.token);
           setEmail(email);
           setLoggedIn(true);
         }
+
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -53,15 +55,17 @@ function App() {
         } else {
           console.log("Неизвестная ошибка: " + err.status);
         }
+        handleInfoTooltip();
       });
   };
   const handleRegister = (password, email) => {
     return auth
       .register(password, email)
       .then((data) => {
-        if (data.error) {
+        console.log(data);
+        if (data.message) {
           setSuccessState(false);
-          return data;
+          return;
         } else {
           setSuccessState(true);
         }
@@ -71,12 +75,12 @@ function App() {
       })
       .catch((err) => {
         setSuccessState(false);
-        handleInfoTooltip();
         if (err.status === 400) {
           console.log("Некорректно заполнено одно из полей ");
         } else {
           console.log("Неизвестная ошибка: " + err.status);
         }
+        handleInfoTooltip();
       });
   };
   const handleLogout = () => {
@@ -88,9 +92,12 @@ function App() {
     auth
       .tokenCheck(jwt)
       .then((res) => {
-        setEmail(res.data.email);
+        api.setHeaders(jwt);
+        setEmail(res.email);
+        setCurrentUser(res);
         setLoggedIn(true);
         history.push("/");
+       // return true;
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -119,7 +126,8 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState();
 
   React.useEffect(() => {
-    api
+    if (loggedIn === true) {
+      api
       .getUserInfo()
       .then((user) => {
         setCurrentUser(user);
@@ -127,7 +135,8 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    }
+  }, [loggedIn]);
 
   function handleUpdateUser(user) {
     setIsLoading(true);
@@ -168,6 +177,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
+    if (loggedIn === true) {
     api
       .getInitialCards()
       .then((cards) => {
@@ -176,10 +186,12 @@ function App() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    }
+
+  }, [loggedIn]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
     api
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {

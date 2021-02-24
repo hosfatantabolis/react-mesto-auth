@@ -3,25 +3,34 @@ import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
-  React.useEffect(() => {
-    setName(currentUser.name);
-    setButtonStateDisabled(true);
-    setDescription(currentUser.about);
-  }, [currentUser]);
 
-  //инпуты
-  const [name, setName] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  React.useEffect(() => {
-    if (nameInputError === "" && descriptionInputError === "") {
-      setButtonStateDisabled(false);
-    }
-  }, [name, description]);
+  const [buttonStateDisabled, setButtonStateDisabled] = React.useState(true);
+
   //спаны ошибок
   const [nameInputError, setNameInputError] = React.useState();
   const [descriptionInputError, setDescriptionInputError] = React.useState();
 
-  const [buttonStateDisabled, setButtonStateDisabled] = React.useState(true);
+  //инпуты
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser, isOpen]);
+
+  React.useEffect(() => {
+    setButtonStateDisabled(true);
+    setNameInputError("");
+    setDescriptionInputError("");
+  }, [isOpen]);
+
+
+  React.useEffect(() => {
+    if (nameInputError === "" && descriptionInputError === "") {
+      setButtonStateDisabled(false);
+    }
+  }, [name, description, descriptionInputError, nameInputError]);
 
   function validate(e) {
     if (e.target.validity.valid === false) {
