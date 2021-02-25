@@ -304,14 +304,21 @@ function App() {
                   onCardLike={handleCardLike}
                   onCardDelete={handleCardDelete}
                 />
-                <Route path="/signin" loggedIn={loggedIn} component={Login}>
+                <Route exact path="/signin" loggedIn={loggedIn} component={Login}>
                   {loggedIn ? (
                     <Redirect to="/" />
                   ) : (
                     <Login onLogin={handleLogin} />
                   )}
                 </Route>
-                <Route path="/signup" loggedIn={loggedIn} component={Register}>
+                <Route exact path="/signup" loggedIn={loggedIn} component={Register}>
+                  {loggedIn ? (
+                    <Redirect to="/" />
+                  ) : (
+                    <Register onRegister={handleRegister} />
+                  )}
+                </Route>
+                <Route path="/*" loggedIn={loggedIn} component={Register}>
                   {loggedIn ? (
                     <Redirect to="/" />
                   ) : (
