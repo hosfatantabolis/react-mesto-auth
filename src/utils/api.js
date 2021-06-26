@@ -163,7 +163,7 @@ class Api {
 }
 
 let options = {
-  baseURL: "https://api.hosfatantabolis.students.nomoreparties.space",
+  baseURL: "https://api.hosfatantabolis.ru",
   headers: {
     authorization: "",
     // cohort: "cohort-17",
