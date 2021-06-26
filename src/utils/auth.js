@@ -48,7 +48,7 @@ class Auth {
 
 
 const options = {
-  baseURL: "https://api.hosfatantabolis.students.nomoreparties.space",
+  baseURL: "https://api.hosfatantabolis.ru",
   headers: {
     "Content-Type": "application/json",
   },
