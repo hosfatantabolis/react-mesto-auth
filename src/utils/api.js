@@ -42,25 +42,19 @@ class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(
-      this.baseURL + "/cards/" + cardId,
-      {
-        method: "DELETE",
-        headers: this.headers,
-      }
-    ).catch((err) => {
+    return fetch(this.baseURL + "/cards/" + cardId, {
+      method: "DELETE",
+      headers: this.headers,
+    }).catch((err) => {
       console.log(err);
     });
   }
 
   likeCard(cardId) {
-    return fetch(
-      this.baseURL + "/cards/" + cardId + "/likes/" ,
-      {
-        method: "PUT",
-        headers: this.headers,
-      }
-    )
+    return fetch(this.baseURL + "/cards/" + cardId + "/likes/", {
+      method: "PUT",
+      headers: this.headers,
+    })
       .then((res) => {
         return res.json();
       })
@@ -70,13 +64,10 @@ class Api {
   }
 
   removeCardLike(cardId) {
-    return fetch(
-      this.baseURL + "/cards/" + cardId + "/likes/",
-      {
-        method: "DELETE",
-        headers: this.headers,
-      }
-    )
+    return fetch(this.baseURL + "/cards/" + cardId + "/likes/", {
+      method: "DELETE",
+      headers: this.headers,
+    })
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -89,10 +80,10 @@ class Api {
       });
   }
 
-  changeLikeCardStatus(cardId, isLiked){
-    if(isLiked === true){
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked === true) {
       return this.removeCardLike(cardId);
-    }else{
+    } else {
       return this.likeCard(cardId);
     }
   }
@@ -134,16 +125,13 @@ class Api {
   }
 
   updateAvatar(link) {
-    return fetch(
-      this.baseURL + "/users/me/avatar",
-      {
-        method: "PATCH",
-        headers: this.headers,
-        body: JSON.stringify({
-          avatar: link,
-        }),
-      }
-    )
+    return fetch(this.baseURL + "/users/me/avatar", {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    })
       .then((res) => {
         if (res.ok) {
           return res;
@@ -156,14 +144,13 @@ class Api {
       });
   }
 
-
-  setHeaders(jwt){
+  setHeaders(jwt) {
     this.headers.authorization = jwt;
   }
 }
 
 let options = {
-  baseURL: "https://api.hosfatantabolis.ru",
+  baseURL: "https://apimovies.hosfatantabolis.ru",
   headers: {
     authorization: "",
     // cohort: "cohort-17",
