@@ -150,7 +150,7 @@ class Api {
 }
 
 let options = {
-  baseURL: "https://apimovies.hosfatantabolis.ru",
+  baseURL: "https://api.hosfatantabolis.ru",
   headers: {
     authorization: "",
     // cohort: "cohort-17",

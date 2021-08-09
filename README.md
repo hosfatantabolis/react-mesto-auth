@@ -1,4 +1,5 @@
 # Mesto-Auth
+
 Front-end часть проекта Mesto на ReactJS.  
 Реализована аутентификация и регистрация с использованием собственного API.  
 Сервис для публикации изображений. Возможность добавления изображений по ссылкам, регистрация и авторизация. Валидация форм, запросы к БД.
@@ -6,13 +7,13 @@ Front-end часть проекта Mesto на ReactJS.
 
 ## Директории
 
-`/blocks` — CSS стили по БЭМ    
+`/blocks` — CSS стили по БЭМ  
 `/components` — компоненты приложения  
 `/contexts` — контекст пользователя  
 `/images` — папка с изображениями  
 `/utils` — вспомогательные файлы  
-`/vendor` — шрифты и сторонние вспомогательные файлы  
+`/vendor` — шрифты и сторонние вспомогательные файлы
 
 ## Ссылка на статику
 
-<a href="http://mesto.hosfatantabolis.ru" target="_blank">http://mesto.hosfatantabolis.ru</a>
+<a href="https://mesto.hosfatantabolis.ru" target="_blank">https://mesto.hosfatantabolis.ru</a>
