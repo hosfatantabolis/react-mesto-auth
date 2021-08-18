@@ -1,3 +1,4 @@
+import React from "react";
 function PopupWithForm({
   name,
   onSubmit,
@@ -11,6 +12,16 @@ function PopupWithForm({
   noButton,
   imgSource,
 }) {
+  function handleEsc(event) {
+    if (event.key !== "Escape") {
+      return;
+    }
+    handleCloseAllPopups();
+  }
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen]);
   return (
     <div className={`popup popup_type_${name} ${isOpen ? "popup_opened" : ""}`}>
       <div className="popup__container">

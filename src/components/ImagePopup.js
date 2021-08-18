@@ -1,4 +1,15 @@
+import React from "react";
 function ImagePopup({ isOpen, handleCloseAllPopups, card }) {
+  function handleEsc(event) {
+    if (event.key !== "Escape") {
+      return;
+    }
+    handleCloseAllPopups();
+  }
+  React.useEffect(() => {
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen]);
   return (
     <div
       className={`popup popup_type_view-image ${
